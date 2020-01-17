@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { View, TextInput, StyleSheet, Button } from 'react-native'
+import axios from 'axios'
 
 const RegForm = props => {
 
@@ -25,8 +26,18 @@ const RegForm = props => {
     setEmail(email)
   }
 
-  const registerUserHandler = () => {
+  const registerUserHandler = async () => {
     console.log(username, email)
+    const formData = {
+      name: username,
+      email
+    }
+    try {
+      const response = await axios.post('http://10.0.2.2:5000/users/', formData)
+      console.log(response.data)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
