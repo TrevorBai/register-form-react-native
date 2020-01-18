@@ -5,7 +5,7 @@ export const registerUser = (formData) => {
   return async dispatch => {
     dispatch(registerUserStart())
     try {
-      const response = await axios.post('http://10.0.2.2:5000/users/', formData)
+      const response = await axios.post('https://register-form-rn-server.herokuapp.com/users/', formData)
       dispatch(registerUserSuccess(response.data._id, response.data))
     } catch (e) {
       dispatch(registerUserFail(e))
