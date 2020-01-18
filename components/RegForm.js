@@ -22,8 +22,8 @@ const RegForm = props => {
   const onRegisterUser = (formData) => dispatch(userActions.registerUser(formData))
 
   const updateRegisterableHandler = useCallback(() => {
-    if (username && email) setRegisterable(true)
-  }, [username, email])
+    if (username && email && image) setRegisterable(true)
+  }, [username, email, image])
 
   useEffect(() => {
     getPermissionAsync(),
@@ -42,12 +42,12 @@ const RegForm = props => {
   const registerUserHandler = async () => {
     const formData = {
       name: username,
-      email
+      email,
+      imageUri: image
     }
     onRegisterUser(formData)
   }
 
-  console.log(registered)
   const registeredRedirect = (registered) => {
     if (registered) {
       props.history.push('/welcome')
@@ -70,7 +70,6 @@ const RegForm = props => {
       aspect: [4, 3],
       quality: 1
     })
-    console.log(result)
 
     if (!result.cancelled) {
       setImage(result.uri)
